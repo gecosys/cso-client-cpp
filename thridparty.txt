@@ -1,0 +1,4 @@
+OpenSSL-1.1.1j
+nlohmann/json-3.9.1
+curl-7.77.0
+libb64-1.2.1
