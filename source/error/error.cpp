@@ -1,5 +1,5 @@
 #include "error/error.h"
-#include "utils/utils_string.hpp"
+#include "utils/utils_general.hpp"
 
 Error::Error() noexcept
 	: info{ nullptr } {}
@@ -60,7 +60,7 @@ bool Error::nil() const noexcept {
 }
 
 std::string Error::toString() const noexcept {
-	return UtilsString::format(
+	return format(
 		"[%s]:%s",
 		this->info->funcName.c_str(),
 		this->info->content.c_str()

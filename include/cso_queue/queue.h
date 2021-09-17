@@ -6,7 +6,7 @@
 #include "item.h"
 #include "interface.h"
 #include "entity/spinlock.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 
 class Queue : public IQueue {
 private:

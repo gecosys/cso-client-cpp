@@ -2,7 +2,7 @@
 #include "entity/bigint.h"
 #include "error/thirdparty.h"
 #include "utils/utils_edian.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 
 BigInt::BigInt() noexcept
     : bn{ BN_new() } {}
@@ -83,10 +83,7 @@ std::tuple<Error, std::string> BigInt::toString(int8_t radix) const {
         OPENSSL_free(str);
         return { Error{}, output };
     }
-    return {
-        Error{ GET_FUNC_NAME(), "Radix must be 10 or 16" },
-        ""
-    };
+    return { Error{ GET_FUNC_NAME(), "Radix must be 10 or 16" }, "" };
 }
 
 std::tuple<Error, BigInt> BigInt::powMod(const BigInt& power, const BigInt& modulus) const {

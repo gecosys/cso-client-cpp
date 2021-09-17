@@ -1,6 +1,6 @@
 #include <cstring>
 #include "cso_connection/connection.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 #include "utils/utils_edian.h"
 #include "error/thirdparty.h"
 

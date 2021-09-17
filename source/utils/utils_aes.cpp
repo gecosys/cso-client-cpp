@@ -2,7 +2,7 @@
 #include <openssl/err.h>
 #include "message/define.h"
 #include "utils/utils_aes.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 #include "error/thirdparty.h"
 
 std::tuple<Error, Array<uint8_t>, Array<uint8_t>, Array<uint8_t>> UtilsAES::encrypt(const Array<uint8_t>& key, const Array<uint8_t>& input, const Array<uint8_t>& aad) {

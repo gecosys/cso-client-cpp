@@ -1,7 +1,7 @@
 #include <openssl/pem.h>
 #include <openssl/err.h>
 #include "utils/utils_rsa.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 #include "encryption/hasing.h"
 #include "error/thirdparty.h"
 

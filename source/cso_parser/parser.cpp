@@ -1,6 +1,6 @@
 #include "utils/utils_aes.h"
 #include "utils/utils_hmac.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 #include "cso_parser/parser.h"
 
 std::unique_ptr<IParser> Parser::build() {

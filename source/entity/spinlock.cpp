@@ -1,5 +1,5 @@
 #include "entity/spinlock.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 
 SpinLock::SpinLock() noexcept
     : value{ false } {}

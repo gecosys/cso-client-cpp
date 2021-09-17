@@ -1,6 +1,5 @@
 #include "entity/http_client.h"
-#include "utils/utils_define.h"
-#include "utils/utils_string.hpp"
+#include "utils/utils_general.hpp"
 #include "error/thirdparty.h"
 
 static size_t cbWrite(void* contents, size_t size, size_t nmemb, void* userp) {
@@ -81,7 +80,7 @@ void HttpClient::cleanup() {
 void HttpClient::setHeader(const std::string& key, const std::string& value) {
     this->headers = curl_slist_append(
         this->headers,
-        UtilsString::format("%s:%s", key.c_str(), value.c_str()).c_str()
+        format("%s:%s", key.c_str(), value.c_str()).c_str()
     );
 }
 

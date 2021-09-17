@@ -2,7 +2,7 @@
 #include <openssl/err.h>
 #include "error/thirdparty.h"
 #include "encryption/hasing.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 
 std::tuple<Error, Array<uint8_t>> Hashing::sha256(const void* data, size_t len) {
     SHA256_CTX ctx;

@@ -2,7 +2,7 @@
 #define CSO_ENTITY_SPINLOCK_H
 
 #include <atomic>
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 
 class SpinLock {
 private:

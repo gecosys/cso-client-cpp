@@ -5,7 +5,7 @@
 #include <memory>
 #include <atomic>
 #include "interface.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 
 class Counter : public ICounter {
 private:

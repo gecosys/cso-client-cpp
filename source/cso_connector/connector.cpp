@@ -10,7 +10,7 @@
 #include "cso_connection/connection.h"
 #include "cso_connector/connector.h"
 #include "message/ready_ticket.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 
 #define Millis_Timestamp() std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()
 

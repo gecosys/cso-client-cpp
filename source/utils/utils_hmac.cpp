@@ -3,15 +3,12 @@
 #include <openssl/err.h>
 #include "message/define.h"
 #include "utils/utils_hmac.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 #include "error/thirdparty.h"
 
 std::tuple<Error, Array<uint8_t>> UtilsHMAC::calcHMAC(const Array<uint8_t>& key, const Array<uint8_t>& data) {
     if (key.length() != LENGTH_KEY) {
-        return std::make_tuple(
-            Error{ GET_FUNC_NAME(), "Length of key must be 32" },
-            Array<uint8_t>{}
-        );
+        return { Error{ GET_FUNC_NAME(), "Length of key must be 32" }, Array<uint8_t>{} };
     }
 
     EVP_PKEY* pKey{};
@@ -49,31 +46,21 @@ std::tuple<Error, Array<uint8_t>> UtilsHMAC::calcHMAC(const Array<uint8_t>& key,
 
     EVP_PKEY_free(pKey);
     EVP_MD_CTX_free(ctx);
-    return {
-        Error{},
-        Array<uint8_t>{ output.release(), lenOutput }
-    };
+    return { Error{}, Array<uint8_t>{ output.release(), lenOutput } };
 
 handleError:
     EVP_PKEY_free(pKey);
     EVP_MD_CTX_free(ctx);
-    return {
-        Error{ GET_FUNC_NAME(), ThirdParty::getOpensslError(ERR_get_error()) },
-        Array<uint8_t>{}
-    };
+    return { Error{ GET_FUNC_NAME(), ThirdParty::getOpensslError(ERR_get_error()) }, Array<uint8_t>{} };
 }
 
 std::tuple<Error, bool> UtilsHMAC::validateHMAC(const Array<uint8_t>& key, const Array<uint8_t>& data, const Array<uint8_t>& expectedHMAC) {
     Error err;
     Array<uint8_t> hmac;
-
     std::tie(err, hmac) = UtilsHMAC::calcHMAC(key, data);
+
     if (!err.nil()) {
         return { std::move(err), false };
     }
-
-    return {
-        Error{},
-        CRYPTO_memcmp(hmac.get(), expectedHMAC.get(), hmac.length()) == 0
-    };
+    return { Error{}, CRYPTO_memcmp(hmac.get(), expectedHMAC.get(), hmac.length()) == 0 };
 }

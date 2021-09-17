@@ -8,8 +8,7 @@
 #include "utils/utils_aes.h"
 #include "utils/utils_rsa.h"
 #include "utils/utils_edian.h"
-#include "utils/utils_define.h"
-#include "utils/utils_string.hpp"
+#include "utils/utils_general.hpp"
 
 using json = nlohmann::json;
 
@@ -38,7 +37,7 @@ std::tuple<Error, ServerKey> Proxy::exchangeKey() {
             }
 
             // Build URL
-            std::string url{ UtilsString::format("%s/exchange-key", this->config->getCSOAddress().c_str()) };
+            std::string url{ format("%s/exchange-key", this->config->getCSOAddress().c_str()) };
 
             // Send request
             HttpClient client;
@@ -63,7 +62,7 @@ std::tuple<Error, ServerKey> Proxy::exchangeKey() {
             int32_t serverCode = j["returncode"].get<int32_t>();
             if (serverCode != 1) {
                 return {
-                    Error{ GET_FUNC_NAME(), UtilsString::format("[Server] (%d)-%s", serverCode, j["data"].get<std::string>().c_str()) },
+                    Error{ GET_FUNC_NAME(), format("[Server] (%d)%s", serverCode, j["data"].get<std::string>().c_str()) },
                     ServerKey{}
                 };
             }
@@ -75,7 +74,7 @@ std::tuple<Error, ServerKey> Proxy::exchangeKey() {
         }
         catch (json::exception& e) {
             return {
-                //Error{ GET_FUNC_NAME(), UtilsString::format("Invalid JSON format: %s", e.what()) },
+                //Error{ GET_FUNC_NAME(), format("Invalid JSON format: %s", e.what()) },
                 Error{ GET_FUNC_NAME(), "Invalid JSON format" },
                 ServerKey{}
             };
@@ -195,7 +194,7 @@ std::tuple<Error, ServerTicket> Proxy::registerConnection(const ServerKey& serve
                 }
 
                 // Build URL
-                std::string url{ UtilsString::format("%s/register-connection", this->config->getCSOAddress().c_str()) };
+                std::string url{ format("%s/register-connection", this->config->getCSOAddress().c_str()) };
 
                 // Send request
                 HttpClient client;
@@ -219,7 +218,7 @@ std::tuple<Error, ServerTicket> Proxy::registerConnection(const ServerKey& serve
                 int32_t serverCode = j["returncode"].get<int32_t>();
                 if (serverCode != 1) {
                     return {
-                        Error{ GET_FUNC_NAME(), UtilsString::format("[Server] (%d)-%s", serverCode, j["data"].get<std::string>().c_str()) },
+                        Error{ GET_FUNC_NAME(), format("[Server] (%d)%s", serverCode, j["data"].get<std::string>().c_str()) },
                         ServerTicket{}
                     };
                 }
@@ -237,7 +236,7 @@ std::tuple<Error, ServerTicket> Proxy::registerConnection(const ServerKey& serve
             }
             catch (json::exception& e) {
                 return {
-                    //Error{ GET_FUNC_NAME(), UtilsString::format("Invalid JSON format: %s", e.what()) },
+                    //Error{ GET_FUNC_NAME(), format("Invalid JSON format: %s", e.what()) },
                     Error{ GET_FUNC_NAME(), "Invalid JSON format" },
                     ServerTicket{}
                 };

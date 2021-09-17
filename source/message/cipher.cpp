@@ -1,6 +1,6 @@
 #include <cstring>
 #include "error/thirdparty.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 #include "message/cipher.h"
 #include "message/define.h"
 
@@ -8,34 +8,34 @@
 
 Cipher::Cipher() noexcept
     : msgID{ 0 },
-    msgTag{ 0 },
-    isFirst{ false },
-    isLast{ false },
-    isRequest{ false },
-    isEncrypted{ false },
-    iv{ LENGTH_IV },
-    authenTag{ LENGTH_AUTHEN_TAG },
-    sign{ LENGTH_SIGN },
-    data{},
-    name{},
-    msgType{} {}
+      msgTag{ 0 },
+      isFirst{ false },
+      isLast{ false },
+      isRequest{ false },
+      isEncrypted{ false },
+      iv{ LENGTH_IV },
+      authenTag{ LENGTH_AUTHEN_TAG },
+      sign{ LENGTH_SIGN },
+      data{},
+      name{},
+      msgType{} {}
 
 Cipher::Cipher(Cipher&& other) noexcept
     : msgID{ std::move(other.msgID) },
-    msgTag{ std::move(other.msgTag) },
-    isFirst{ std::move(other.isFirst) },
-    isLast{ std::move(other.isLast) },
-    isRequest{ std::move(other.isRequest) },
-    isEncrypted{ std::move(other.isEncrypted) },
-    iv{},
-    authenTag{},
-    sign{},
-    data{ std::move(other.data) },
-    name{ std::move(other.name) },
-    msgType{ std::move(other.msgType) } {
-    std::swap(this->iv, other.iv);
-    std::swap(this->authenTag, other.authenTag);
-    std::swap(this->sign, other.sign);
+      msgTag{ std::move(other.msgTag) },
+      isFirst{ std::move(other.isFirst) },
+      isLast{ std::move(other.isLast) },
+      isRequest{ std::move(other.isRequest) },
+      isEncrypted{ std::move(other.isEncrypted) },
+      iv{},
+      authenTag{},
+      sign{},
+      data{ std::move(other.data) },
+      name{ std::move(other.name) },
+      msgType{ std::move(other.msgType) } {
+      std::swap(this->iv, other.iv);
+      std::swap(this->authenTag, other.authenTag);
+      std::swap(this->sign, other.sign);
 }
 
 Cipher& Cipher::operator=(Cipher&& other) noexcept {

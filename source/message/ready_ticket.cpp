@@ -1,11 +1,11 @@
 #include "message/ready_ticket.h"
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 
 ReadyTicket::ReadyTicket() noexcept
     : isReady{ false },
       maskRead{ 0 },
-    idxRead{ 0 },
-    idxWrite{ 0 } {}
+      idxRead{ 0 },
+      idxWrite{ 0 } {}
 
 ReadyTicket::~ReadyTicket() noexcept {}
 

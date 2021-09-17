@@ -14,7 +14,7 @@
 #include <cassert>
 #include <type_traits>
 
-#include "utils/utils_define.h"
+#include "utils/utils_general.hpp"
 
 template<typename Type, bool UsingCPUCacheLine>
 class SPSCQueue {
