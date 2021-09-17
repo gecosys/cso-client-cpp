@@ -74,8 +74,7 @@ std::tuple<Error, ServerKey> Proxy::exchangeKey() {
         }
         catch (json::exception& e) {
             return {
-                //Error{ GET_FUNC_NAME(), format("Invalid JSON format: %s", e.what()) },
-                Error{ GET_FUNC_NAME(), "Invalid JSON format" },
+                Error{ GET_FUNC_NAME(), format("Invalid JSON format: %s", e.what()) },
                 ServerKey{}
             };
         }
@@ -236,8 +235,7 @@ std::tuple<Error, ServerTicket> Proxy::registerConnection(const ServerKey& serve
             }
             catch (json::exception& e) {
                 return {
-                    //Error{ GET_FUNC_NAME(), format("Invalid JSON format: %s", e.what()) },
-                    Error{ GET_FUNC_NAME(), "Invalid JSON format" },
+                    Error{ GET_FUNC_NAME(), format("Invalid JSON format: %s", e.what()) },
                     ServerTicket{}
                 };
             }
