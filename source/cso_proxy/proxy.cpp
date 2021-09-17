@@ -178,6 +178,10 @@ std::tuple<Error, ServerTicket> Proxy::registerConnection(const ServerKey& serve
                     std::string encodeTag = Base64::encode(tag);
                     std::string encodeToken = Base64::encode(token);
 
+                    iv.reset();
+                    tag.reset();
+                    token.reset();
+
                     json js;
                     js["project_id"] = this->config->getProjectID();
                     js["project_token"] = encodeToken;
@@ -186,10 +190,6 @@ std::tuple<Error, ServerTicket> Proxy::registerConnection(const ServerKey& serve
                     js["iv"] = encodeIV;
                     js["authen_tag"] = encodeTag;
                     body = js.dump();
-
-                    iv.release();
-                    tag.release();
-                    token.release();
                 }
 
                 // Build URL
